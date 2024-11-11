@@ -19,9 +19,14 @@ def pdf_to_markdown(input_path, output_path):
         if idx % 2 == 1:  # Título da Edição
             markdown_text += f"\n## {content.strip()}\n\n"
         elif idx % 2 == 0 and content.strip():  # Conteúdo da Edição
-            # Substituir URLs com formato Markdown
+            # Substituir URLs com formato Markdown e manter os links
             content_with_links = re.sub(r'(https?://\S+)', r'[\1](\1)', content)
             markdown_text += content_with_links + "\n\n"
+
+            # Adicionar links diretamente após as citações
+            links = re.findall(r'(https?://\S+)', content)
+            for link in links:
+                markdown_text += f"[Link]({link})\n"
 
     # Salvar arquivo Markdown
     with open(output_path, 'w', encoding='utf-8') as file:
@@ -30,8 +35,8 @@ def pdf_to_markdown(input_path, output_path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converter PDF para Markdown")
-    parser.add_argument("--input", type=str, required=True, help="Caminho do arquivo PDF de entrada")
-    parser.add_argument("--output", type=str, required=True, help="Caminho do arquivo Markdown de saída")
+    parser.add_argument("--input", type=str, default='/media/peixoto/stuff/pesquisaprontabd/JTSelecao_backup.pdf', help="Caminho do arquivo PDF de entrada")
+    parser.add_argument("--output", type=str, default='pesquisaem.md', help="Caminho do arquivo Markdown de saída")
     args = parser.parse_args()
 
     pdf_to_markdown(args.input, args.output)
