@@ -1,0 +1,14 @@
+
+Estrutura do projeto:
+    
+stj_jurisprudencia_extractor/
+│
+├── JTSelecao_backup.pdf            # Seu arquivo PDF para conversão inicial
+├── output/                         # Diretório para os arquivos Markdown gerados
+│   └── JTSelecao_backup.md         # Arquivo Markdown gerado a partir do PDF
+│
+├── README.md                       # Instruções do projeto e dependências
+├── requirements.txt                # Lista de pacotes Python necessários
+├── .gitignore                      # Arquivos e pastas a serem ignorados pelo Git
+└── src/                            # Diretório para o código Python
+    └── pdf_to_markdown.py          # Script para converter PDFs para Markdown
